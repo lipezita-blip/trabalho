@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orgulho e Preconceito - Jane Austen</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+  :root{
+    --bg: #0b0b0b;
+    --paper: #161616;
+    --ink: #e8e8e8;
+    --muted: #a8a8a8;
+    --line: #2e2e2e;
+    --accent: #ffffff;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  body{
+    font-family:'Cormorant Garamond', serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.7;
+    font-size:19px;
+  }
+
+  h1,h2,h3{font-family:'Playfair Display', serif;}
+
+  /* ===== NAV ===== */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    display:flex; justify-content:center; gap:2rem;
+    padding:1rem; flex-wrap:wrap;
+  }
+  nav a{
+    text-decoration:none; color:var(--muted);
+    font-family:'Playfair Display', serif;
+    font-size:0.95rem; letter-spacing:1px;
+    text-transform:uppercase;
+    transition:color .25s;
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+  }
+  nav a:hover{color:var(--accent); border-color:var(--accent);}
+
+  /* ===== CAPA ===== */
+  .capa{
+    min-height:90vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,255,255,0.04), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(255,255,255,0.04), transparent 45%),
+      var(--paper);
+    padding:3rem 1.5rem;
+    border-bottom:3px double #444;
+    position:relative;
+  }
+  .capa .balls-row{
+    margin-bottom:1.2rem;
+    font-size:1.8rem;
+    letter-spacing:1rem;
+  }
+  .capa h1{
+    font-size:clamp(2.5rem, 7vw, 5rem);
+    font-weight:700;
+    color:var(--ink);
+    letter-spacing:2px;
+    margin-bottom:0.3rem;
+  }
+  .capa .autora{
+    font-style:italic;
+    font-size:1.4rem;
+    color:var(--muted);
+    margin-bottom:2rem;
+  }
+  .capa .frase-impacto{
+    max-width:650px;
+    font-size:clamp(1.2rem, 3vw, 1.6rem);
+    font-style:italic;
+    color:var(--ink);
+    border-top:1px solid #444;
+    border-bottom:1px solid #444;
+    padding:1.2rem 1.5rem;
+    line-height:1.6;
+  }
+  .capa .frase-impacto span{
+    display:block;
+    margin-top:0.6rem;
+    font-size:1rem;
+    font-family:'Playfair Display', serif;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  /* ===== SECTIONS ===== */
+  section{
+    max-width:850px;
+    margin:0 auto;
+    padding:5rem 1.5rem;
+  }
+  section h2{
+    font-size:clamp(1.8rem,4vw,2.6rem);
+    color:var(--ink);
+    text-align:center;
+    margin-bottom:0.5rem;
+  }
+  .ornamento{
+    text-align:center;
+    color:var(--muted);
+    margin-bottom:2.5rem;
+    font-size:1.4rem;
+    letter-spacing:1rem;
+  }
+  section p{margin-bottom:1.1rem; text-align:justify; color:var(--ink);}
+
+  .alt-bg{background:var(--paper);}
+
+  /* ===== TEMAS ===== */
+  .temas-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:1.8rem;
+    margin-top:1rem;
+  }
+  .tema-card{
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:1.6rem 1.4rem;
+    position:relative;
+    transition:transform .25s, box-shadow .25s, border-color .25s;
+  }
+  .tema-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 24px rgba(255,255,255,0.06);
+    border-color:#666;
+  }
+  .tema-card h3{
+    color:var(--ink);
+    font-size:1.25rem;
+    margin-bottom:0.5rem;
+    display:flex; align-items:center; gap:0.5rem;
+  }
+  .tema-card p{margin-bottom:0; font-size:0.98rem;}
+
+  /* ===== AUTORA ===== */
+  .autora-box{
+    display:flex; gap:2.5rem; align-items:center;
+    flex-wrap:wrap;
+  }
+  .autora-box .silhueta{
+    flex-shrink:0;
+    width:160px; height:160px;
+    border-radius:50%;
+    background:repeating-conic-gradient(#222 0% 10%, #000 0% 20%);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display', serif;
+    font-size:3rem; color:#fff;
+    border:1px solid var(--line);
+    box-shadow:0 6px 18px rgba(0,0,0,0.5);
+  }
+  .autora-box .texto{flex:1; min-width:250px;}
+
+  /* ===== OPINIÃO ===== */
+  .opiniao{
+    background:var(--bg);
+    border-left:4px solid var(--ink);
+    padding:2rem 2.2rem;
+    border-radius:4px;
+    font-style:italic;
+  }
+  .opiniao p:last-child{
+    text-align:right;
+    font-style:normal;
+    font-family:'Playfair Display', serif;
+    color:var(--muted);
+    letter-spacing:1px;
+    margin-top:1.5rem;
+  }
+
+  /* ===== FOOTER ===== */
+  footer{
+    text-align:center;
+    padding:2.5rem 1.5rem;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Playfair Display', serif;
+    letter-spacing:1px;
+    border-top:1px solid var(--line);
+  }
+  footer p{font-size:0.95rem; opacity:0.75; margin-top:0.4rem; font-family:'Cormorant Garamond', serif; font-style:italic;}
+
+  @media(max-width:600px){
+    body{font-size:17px;}
+    .autora-box{flex-direction:column; text-align:center; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#capa">Início</a>
+  <a href="#sinopse">Sinopse</a>
+  <a href="#autora">Autora</a>
+  <a href="#temas">Temas</a>
+  <a href="#opiniao">Opinião</a>
+</nav>
+
+<!-- ===== CAPA ===== -->
+<header class="capa" id="capa">
+  <div class="balls-row">⚽ ⚽ ⚽</div>
+  <h1>Orgulho e Preconceito</h1>
+  <p class="autora">de Jane Austen</p>
+  <p class="frase-impacto">
+    "É verdade universalmente reconhecida que um homem solteiro, possuidor de uma boa fortuna, deve estar necessitado de uma esposa."
+    <span>Jane Austen, 1813</span>
+  </p>
+</header>
+
+<!-- ===== SINOPSE ===== -->
+<section id="sinopse">
+  <h2>⚽ Sinopse</h2>
+  <div class="ornamento">⚽ ⚽ ⚽</div>
+  <p>
+    Na Inglaterra rural do início do século XIX, a família Bennet vive em meio às expectativas
+    sociais que cercam o casamento de suas cinco filhas. Quando o rico e reservado Sr. Darcy
+    chega à vizinhança junto de seu amigo Sr. Bingley, a vida tranquila de Elizabeth Bennet
+    é abalada por uma primeira impressão nada favorável.
+  </p>
+  <p>
+    Inteligente, espirituosa e dona de uma língua afiada, Elizabeth não hesita em julgar
+    Darcy como arrogante e orgulhoso — enquanto ele, por sua vez, parece enxergar nela apenas
+    os "defeitos" de uma origem social mais modesta. Entre bailes, fofocas, cartas reveladoras
+    e mal-entendidos, os dois são forçados a confrontar seus próprios preconceitos.
+  </p>
+  <p>
+    Com humor refinado e uma crítica afiada aos costumes da sociedade da época, a obra
+    acompanha não apenas o (des)encontro entre Elizabeth e Darcy, mas também os dilemas
+    amorosos e financeiros de toda a família Bennet — sem revelar, é claro, como (ou se)
+    tudo termina bem. 😉
+  </p>
+</section>
+
+<!-- ===== AUTORA ===== -->
+<section id="autora" class="alt-bg">
+  <h2>⚽ Sobre a Autora</h2>
+  <div class="ornamento">⚽ ⚽ ⚽</div>
+  <div class="autora-box">
+    <div class="silhueta">JA</div>
+    <div class="texto">
+      <p>
+        <strong>Jane Austen</strong> (1775–1817) foi uma escritora inglesa cujas obras se tornaram
+        clássicos da literatura mundial. Vivendo em uma época em que era raro — e mal visto —
+        que mulheres publicassem livros, Austen lançou seus romances de forma anônima,
+        assinando apenas como "uma senhora" (<em>by a Lady</em>).
+      </p>
+      <p>
+        Com um olhar irônico e extremamente perspicaz sobre a sociedade da Inglaterra rural,
+        ela retratou com precisão os costumes, as pressões sociais e as desigualdades
+        enfrentadas pelas mulheres de sua época — especialmente no que diz respeito a
+        casamento, herança e independência financeira.
+      </p>
+      <p>
+        Além de <em>Orgulho e Preconceito</em> (1813), Austen escreveu obras como
+        <em>Razão e Sensibilidade</em>, <em>Emma</em> e <em>Persuasão</em>, e até hoje é
+        considerada uma das maiores escritoras da língua inglesa.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TEMAS ===== -->
+<section id="temas">
+  <h2>⚽ Principais Temas</h2>
+  <div class="ornamento">⚽ ⚽ ⚽</div>
+  <div class="temas-grid">
+    <div class="tema-card">
+      <h3>⚽ Casamento e classe social</h3>
+      <p>O romance expõe como o casamento, na época, funcionava muitas vezes como uma
+      necessidade econômica e social, mais do que uma escolha afetiva.</p>
+    </div>
+    <div class="tema-card">
+      <h3>⚽ Orgulho e aparências</h3>
+      <p>Os personagens são constantemente julgados — e julgam uns aos outros — por
+      status, riqueza e modos, revelando o peso das aparências na sociedade.</p>
+    </div>
+    <div class="tema-card">
+      <h3>⚽ Preconceito e primeiras impressões</h3>
+      <p>A obra mostra como julgamentos precipitados podem distorcer a percepção que
+      temos sobre as pessoas — e sobre nós mesmos.</p>
+    </div>
+    <div class="tema-card">
+      <h3>⚽ Papel da mulher</h3>
+      <p>Através de Elizabeth e suas irmãs, Austen questiona as restrições impostas às
+      mulheres em relação à educação, independência e futuro.</p>
+    </div>
+    <div class="tema-card">
+      <h3>⚽ Crítica social com humor</h3>
+      <p>A ironia é uma das marcas do estilo de Austen, usada para satirizar costumes,
+      personagens fúteis e convenções sociais absurdas.</p>
+    </div>
+    <div class="tema-card">
+      <h3>⚽ Amor e autoconhecimento</h3>
+      <p>Mais do que uma história de amor, é uma jornada de maturidade emocional e
+      revisão de valores por parte dos protagonistas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OPINIÃO ===== -->
+<section id="opiniao" class="alt-bg">
+  <h2>⚽ Minha Opinião</h2>
+  <div class="ornamento">⚽ ⚽ ⚽</div>
+  <div class="opiniao">
+    <p>
+      "Orgulho e Preconceito" é uma daquelas obras que parecem antigas só no calendário —
+      por dentro, ela é surpreendentemente atual. Os diálogos afiados de Elizabeth Bennet,
+      a tensão entre o que se sente e o que a sociedade espera, e a forma como Jane Austen
+      ironiza tudo isso com uma sutileza cirúrgica fazem da leitura uma experiência tão
+      divertida quanto inteligente.
+    </p>
+    <p>
+      Recomendo este livro porque ele consegue equilibrar romance, crítica social e humor
+      sem soar pesado ou ultrapassado. É impossível não se identificar com Elizabeth, não
+      torcer (ou se irritar) com Darcy, e não rir das situações criadas pela Sra. Bennet.
+      Mais do que uma história de amor, é uma reflexão sobre julgamento, orgulho e a
+      coragem de mudar de opinião — algo que, convenhamos, nunca sai de moda.
+    </p>
+    <p>— Uma leitura essencial para quem gosta de bons personagens e melhores ainda diálogos.</p>
+  </div>
+</section>
+
+<footer>
+  <p>⚽ Orgulho e Preconceito — Jane Austen (1813) ⚽</p>
+  <p>Trabalho de Língua Portuguesa</p>
+</footer>
+
+</body>
+</html>
